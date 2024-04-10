@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,6 +81,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastPosition = new Vector3(0f, 0f, 0f);
     public bool isMoving;
 
+    //Animations
+    private readonly int dance = Animator.StringToHash("Dance");
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             MoveLogic();
             CameraLogic();
+            Dance();
         }
 
         if (!Active) return;
@@ -117,6 +121,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             TakeDamage(10f);
+        }
+    }
+
+    private void Dance()
+    {
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            playerAnim.Play(dance);
         }
     }
 
